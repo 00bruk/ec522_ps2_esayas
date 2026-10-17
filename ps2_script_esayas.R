@@ -62,3 +62,13 @@ unemp_top_increases <- unemp |> slice_max(unemployment_rate_change, n = 5)
 unemp_top_decreases <- unemp |> slice_min(unemployment_rate_change, n = 5)
 unemp_top_increases_no_covid <- unemp |> filter(year(date) != 2020) |> slice_max(unemployment_rate_change, n = 5)
 unemp_top_decreases_no_covid <- unemp |> filter(year(date) != 2020) |> slice_min(unemployment_rate_change, n = 5)
+
+# ==========================================
+# Part 5 – Visualize the Data with ggplot2
+# ==========================================
+p1 <- ggplot(unemp, aes(x = date, y = unemployment_rate, color = region)) + geom_line() + labs(title = "Monthly Unemployment Rate (1976-Present)", x = "Date", y = "Unemployment Rate (%)", color = "Region") + theme_minimal()
+p2 <- ggplot(unemp, aes(x = date, y = unemployment_rate, color = region)) + geom_line() + facet_wrap(~ region) + labs(title = "Monthly Unemployment Rate by Region", x = "Date", y = "Unemployment Rate (%)") + theme_minimal()
+p3 <- ggplot(unemp_summary, aes(x = fct_reorder(region, mean_rate), y = mean_rate)) + geom_col() + labs(title = "Mean Unemployment Rate by Region (1976-Present)", x = "Region", y = "Mean Rate (%)") + theme_minimal()
+p4 <- ggplot(filter(unemp, year(date) != 2020), aes(x = date, y = unemployment_rate_change, color = region)) + geom_line() + labs(title = "Month-over-Month Unemployment Rate Change (Excluding 2020)", x = "Date", y = "Change (Percentage Points)", color = "Region") + theme_minimal()
+
+print("Parts 4 and 5 complete.")
