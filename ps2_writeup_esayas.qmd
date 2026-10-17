@@ -1,0 +1,52 @@
+---
+title: "Econ 522 - PS2"
+author: "Bruk Esayas"
+format:
+  html:
+    toc: true
+    embed-resources: true
+---
+
+**GitHub repo:** <https://github.com/00bruk/ec522_ps2_esayas>
+
+```{r}
+#| include: false
+library(tidyverse)
+library(knitr)
+# Sourcing your script silently loads all the data, tables, and plots you just built
+source("ps2_script_esayas.R")
+```
+
+## 1. Data
+This dataset, sourced from FRED, includes monthly UE rates (%) for the US: Oregon, California, Texas, and New York from January 1976 to present.
+```{r}
+head(unemp_raw)
+```
+
+## 2. Wrangling
+This table includes a summary of the unemployment rate over the 5 states. The first 2 tables includes the minimum, mean, and maximum rates for the full sample (from 1976- Present) and the recent sample (2015-Present). The last 2 tables shows the more extreme month-over-month increases and decreases (not including 2020 in order to remove pandemic-related noise).
+
+```{r}
+#| echo: false
+kable(unemp_summary, digits = 2, caption = "Full Sample Summary")
+kable(unemp_recent_summary, digits = 2, caption = "Recent Sample Summary (2015-Present)")
+kable(unemp_top_increases_no_covid, digits = 2, caption = "Top 5 Increases (Excluding 2020)")
+kable(unemp_top_decreases_no_covid, digits = 2, caption = "Top 5 Decreases (Excluding 2020)")
+```
+
+## 3. Visualization
+The figures visualize UE trends across our 5 states. Including: a combined line plot, a faceted line plot by region, a bar chart of mean rates, and a choice plot of month-to-month variations.
+
+```{r}
+#| echo: false
+#| warning: false
+p1
+p2
+p3
+p4
+```
+
+Note: This choice plot shows month-to-month volatility in regional UE rates. We remove 2020 in order to remove any distortions in the data caused by the pandemic.
+
+## 4. Reflection
+The most challenging parts of this data set was getting git connected to github and trying to troubleshoot the FRED API connection blocks. Using the terminal to clone, commit, and push took a few attempts before I finally got the hang of it. The most straightforward part was probably the data extraction and ggplot visualization portion of the project. All in all, I definetely feel more comfortable running git commits mid-project in comparison to when I first started.
